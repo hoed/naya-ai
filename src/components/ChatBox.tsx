@@ -50,7 +50,7 @@ const ChatBox = ({ messages, isLoading }: ChatBoxProps) => {
               </svg>
             </div>
             <p className="text-muted-foreground">
-              Mulai percakapan dengan Naya!
+              Mulai percakapan dengan AISA!
             </p>
             <p className="text-sm text-muted-foreground/70 mt-1">
               Ketik pesan atau tekan tombol mikrofon
