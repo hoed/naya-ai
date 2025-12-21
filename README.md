@@ -1,73 +1,196 @@
-# Welcome to your Lovable project
+# AISA — AI Customer Service Pariwisata Kabupaten Sidoarjo 🌏🤖
 
-## Project info
+**AISA** adalah **AI Customer Service berbasis web** dengan **avatar perempuan 2D interaktif** yang dikembangkan untuk **Dinas Pariwisata Kabupaten Sidoarjo**.  
+Aplikasi ini bertujuan memberikan **informasi lengkap, akurat, dan ramah** mengenai pariwisata Sidoarjo kepada masyarakat dan wisatawan.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## 🎯 Tujuan Aplikasi
+- Menjadi **front-office digital** Dinas Pariwisata Sidoarjo
+- Menyampaikan informasi wisata secara cepat dan konsisten
+- Mendukung program **Smart Tourism & Transformasi Digital**
+- Mengurangi beban pertanyaan manual petugas
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## 👩‍💼 Tentang AISA
+- **Nama AI:** AISA  
+- **Peran:** Asisten Informasi Pariwisata Resmi  
+- **Karakter:** Ramah, informatif, netral, profesional  
+- **Bahasa:** Bahasa Indonesia (formal ringan)  
+- **Avatar:** Perempuan 2D (Lottie Animation)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+AISA **tidak memberikan opini pribadi** dan **tidak menggantikan peran pejabat atau petugas**, melainkan membantu masyarakat mendapatkan informasi.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🗺️ Cakupan Informasi
+AISA mampu menjelaskan:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### ✅ Pariwisata Kabupaten Sidoarjo
+- Wisata alam
+- Wisata budaya
+- Wisata religi
+- Wisata kuliner
+- Event & festival daerah
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### ✅ Wisata per Kecamatan
+- Informasi destinasi wisata di setiap kecamatan
+- Deskripsi singkat & keunikan lokal
+- Akses & rekomendasi kunjungan
 
-Follow these steps:
+### ✅ Informasi Umum
+- Lokasi & potensi wisata
+- Jam operasional (jika tersedia)
+- Edukasi budaya & sejarah Sidoarjo
+- Arahkan ke Dinas Pariwisata bila perlu konfirmasi resmi
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🧠 Knowledge Base
+Aplikasi ini menggunakan **Knowledge Base berbentuk CSV** yang berisi:
+- Kecamatan
+- Nama wisata
+- Jenis wisata
+- Deskripsi
+- Alamat
+- Catatan tambahan
 
-# Step 3: Install the necessary dependencies.
-npm i
+Knowledge base dapat dikembangkan menjadi:
+- Vector Database (RAG)
+- Integrasi CMS pariwisata
+- Dashboard admin
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+---
+
+## 🧩 Arsitektur Sistem
+```
+
+Frontend (Web)
+
+* React + Vite
+* Lottie Avatar 2D
+* Web Speech API
+  │
+  ▼
+  Backend (FastAPI)
+* WebSocket Real-time
+* AI Prompt & Logic
+* Knowledge Base CSV
+  │
+  ▼
+  AI Engine
+* NLP & Reasoning
+* Contextual Response
+
+````
+
+---
+
+## 🖥️ Teknologi yang Digunakan
+
+### Frontend
+- React
+- Vite
+- Lottie-react
+- Web Speech API
+
+### Backend
+- Python FastAPI
+- WebSocket
+- CSV-based Knowledge Base
+
+### AI
+- LLM (Cloud / Local)
+- System Prompt khusus Dinas Pariwisata
+
+---
+
+## 🚀 Cara Menjalankan Aplikasi
+
+### 1️⃣ Backend
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+````
+
+### 2️⃣ Frontend
+
+```bash
+cd frontend
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Akses aplikasi di:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+http://localhost:5173
+```
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔐 Etika & Batasan AI
 
-## What technologies are used for this project?
+AISA **TIDAK BOLEH**:
 
-This project is built with:
+* Memberikan data sensitif
+* Memberikan keputusan kebijakan
+* Mengatasnamakan pejabat pemerintah
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+AISA **BOLEH**:
 
-## How can I deploy this project?
+* Memberikan informasi publik
+* Edukasi pariwisata
+* Mengarahkan ke kanal resmi Dinas Pariwisata
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## 📈 Rencana Pengembangan
 
-Yes, you can!
+* Integrasi peta wisata interaktif
+* Multibahasa (EN / ID)
+* Mode suara untuk lansia & disabilitas
+* Dashboard admin pariwisata
+* Integrasi event kalender daerah
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 🏛️ Penggunaan Resmi
+
+Aplikasi ini dirancang untuk:
+
+* Demo internal Dinas Pariwisata
+* Pilot project Smart City
+* Presentasi pimpinan daerah
+* Pengembangan layanan publik digital
+
+---
+
+## 📄 Lisensi
+
+Proyek ini menggunakan lisensi **MIT**
+Bebas digunakan dan dikembangkan dengan tetap menghormati etika pelayanan publik.
+
+---
+
+## 🤝 Kontribusi
+
+Kontribusi terbuka untuk:
+
+* Pengayaan data wisata
+* Peningkatan UI/UX
+* Optimasi AI & knowledge base
+
+Silakan buat **Pull Request** atau **Issue**.
+
+---
+
+## ✨ Penutup
+
+**AISA** adalah langkah nyata menuju **Pariwisata Sidoarjo yang cerdas, ramah, dan inklusif** melalui teknologi AI.
+
+> *“Teknologi melayani, budaya tetap utama.”*
+
+---
