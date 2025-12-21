@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mic, MicOff, Send, Volume2, VolumeX } from "lucide-react";
@@ -8,103 +8,30 @@ interface VoiceControlProps {
   onSendMessage: (message: string) => void;
   onListeningChange: (isListening: boolean) => void;
   isProcessing?: boolean;
+  externalIsListening?: boolean;
 }
 
 const VoiceControl = ({
   onSendMessage,
   onListeningChange,
   isProcessing,
+  externalIsListening = false,
 }: VoiceControlProps) => {
   const [inputText, setInputText] = useState("");
-  const [isListening, setIsListening] = useState(false);
   const [isSpeechEnabled, setIsSpeechEnabled] = useState(true);
-  const [isSupported, setIsSupported] = useState(true);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
   const { toast } = useToast();
 
-  // Check for speech recognition support
-  useEffect(() => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      setIsSupported(false);
-      console.log("Speech recognition not supported");
-    }
-  }, []);
-
-  const startListening = useCallback(() => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      toast({
-        title: "Tidak Didukung",
-        description: "Browser Anda tidak mendukung pengenalan suara",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = "id-ID";
-    recognition.continuous = false;
-    recognition.interimResults = true;
-
-    recognition.onstart = () => {
-      setIsListening(true);
-      onListeningChange(true);
-    };
-
-    recognition.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((result) => result[0].transcript)
-        .join("");
-
-      setInputText(transcript);
-
-      // If final result, send message
-      if (event.results[0].isFinal) {
-        onSendMessage(transcript);
-        setInputText("");
-      }
-    };
-
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      setIsListening(false);
-      onListeningChange(false);
-
-      if (event.error === "not-allowed") {
-        toast({
-          title: "Akses Mikrofon Ditolak",
-          description: "Mohon izinkan akses mikrofon untuk menggunakan fitur suara",
-          variant: "destructive",
-        });
-      }
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-      onListeningChange(false);
-    };
-
-    recognitionRef.current = recognition;
-    recognition.start();
-  }, [onListeningChange, onSendMessage, toast]);
-
-  const stopListening = useCallback(() => {
-    if (recognitionRef.current) {
-      recognitionRef.current.stop();
-      recognitionRef.current = null;
-    }
-    setIsListening(false);
-    onListeningChange(false);
-  }, [onListeningChange]);
+  const isListening = externalIsListening;
 
   const toggleListening = () => {
     if (isListening) {
-      stopListening();
+      onListeningChange(false);
     } else {
-      startListening();
+      onListeningChange(true);
+      toast({
+        title: "Menghubungkan...",
+        description: "Menghubungkan ke agen ElevenLabs",
+      });
     }
   };
 
@@ -154,8 +81,8 @@ const VoiceControl = ({
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={isListening ? "Mendengarkan..." : "Ketik pesan..."}
-            disabled={isProcessing || isListening}
+            placeholder={isListening ? "Agen sedang mendengarkan..." : "Ketik pesan..."}
+            disabled={isProcessing}
             className="pr-12 h-12 rounded-full border-2 border-border/50 bg-card/80 backdrop-blur-sm focus:border-primary transition-all"
           />
           <Button
@@ -169,20 +96,18 @@ const VoiceControl = ({
         </div>
 
         {/* Mic button */}
-        {isSupported && (
-          <Button
-            type="button"
-            onClick={toggleListening}
-            disabled={isProcessing}
-            className={`mic-button h-12 w-12 ${isListening ? "active bg-destructive hover:bg-destructive/90" : ""}`}
-          >
-            {isListening ? (
-              <MicOff className="h-5 w-5 text-primary-foreground" />
-            ) : (
-              <Mic className="h-5 w-5 text-primary-foreground" />
-            )}
-          </Button>
-        )}
+        <Button
+          type="button"
+          onClick={toggleListening}
+          disabled={isProcessing}
+          className={`mic-button h-12 w-12 ${isListening ? "active bg-destructive hover:bg-destructive/90" : ""}`}
+        >
+          {isListening ? (
+            <MicOff className="h-5 w-5 text-primary-foreground" />
+          ) : (
+            <Mic className="h-5 w-5 text-primary-foreground" />
+          )}
+        </Button>
       </form>
 
       {/* Listening indicator */}
@@ -200,7 +125,7 @@ const VoiceControl = ({
               />
             ))}
           </div>
-          <span className="text-sm text-destructive font-medium">Rekaman aktif</span>
+          <span className="text-sm text-destructive font-medium">Agen ElevenLabs Aktif</span>
         </div>
       )}
     </div>
@@ -208,3 +133,4 @@ const VoiceControl = ({
 };
 
 export default VoiceControl;
+
