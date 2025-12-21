@@ -106,7 +106,7 @@ const Index = () => {
       {/* Footer - Subtle */}
       <footer className="flex-none pb-2 text-center">
         <p className="text-[10px] text-muted-foreground">
-          Didukung oleh ElevenLabs & Gemini • Dinas Pariwisata Sidoarjo
+          © 2025 - Crafted by Hoed for Sidoarjo Tourism
         </p>
       </footer>
     </div>
