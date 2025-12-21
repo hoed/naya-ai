@@ -30,7 +30,7 @@ const VoiceControl = ({
       onListeningChange(true);
       toast({
         title: "Menghubungkan...",
-        description: "Menghubungkan ke agen ElevenLabs",
+        description: "Menghubungkan ke agen AISA",
       });
     }
   };
@@ -125,7 +125,7 @@ const VoiceControl = ({
               />
             ))}
           </div>
-          <span className="text-sm text-destructive font-medium">Agen ElevenLabs Aktif</span>
+          <span className="text-sm text-destructive font-medium">Agen AISA Aktif</span>
         </div>
       )}
     </div>
