@@ -180,20 +180,20 @@ const Index = () => {
       </header>
 
       {/* Main Content */}
-      <main className={`relative flex-1 flex flex-col container mx-auto px-4 overflow-hidden z-10 transition-all duration-1000 delay-300 ${!hasStarted ? 'opacity-0' : 'opacity-100'}`}>
+      <main className={`relative flex-1 flex flex-col md:flex-row container mx-auto px-4 gap-4 md:gap-8 overflow-hidden z-10 transition-all duration-1000 delay-300 ${!hasStarted ? 'opacity-0' : 'opacity-100'}`}>
         {/* Avatar Section */}
-        <div className="flex-none flex flex-col items-center justify-center py-6">
+        <div className="flex-none md:flex-1 flex flex-col items-center justify-center py-4 md:py-0">
           <NayaAvatar state={avatarState} />
         </div>
 
         {/* Chat Section */}
-        <div className="flex-1 flex flex-col min-h-0 mb-6 rounded-[2rem] border border-white/10 bg-card/30 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-500 hover:border-white/20">
+        <div className="flex-1 md:flex-[1.2] flex flex-col min-h-0 mb-6 md:my-8 rounded-[2rem] border border-white/10 bg-card/30 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-500 hover:border-white/20">
           <div className="flex-1 overflow-hidden">
             <ChatBox messages={messages} isLoading={isLoading} />
           </div>
 
           {/* Voice & Text Control */}
-          <div className="flex-none border-t border-white/5 bg-white/5 backdrop-blur-md p-6">
+          <div className="flex-none border-t border-white/5 bg-white/5 backdrop-blur-md p-4 md:p-6">
             <VoiceControl
               onSendMessage={handleSendMessage}
               onListeningChange={handleListeningChange}
