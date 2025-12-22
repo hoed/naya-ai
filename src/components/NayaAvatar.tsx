@@ -10,61 +10,73 @@ const NayaAvatar = ({ state }: NayaAvatarProps) => {
   const getStateClass = () => {
     switch (state) {
       case "listening":
-        return "aisa-avatar-listening border-destructive";
+        return "naya-avatar-listening border-accent shadow-[0_0_30px_rgba(234,88,12,0.3)] scale-105";
       case "talking":
-        return "aisa-avatar-talking border-primary";
+        return "naya-avatar-talking border-primary shadow-[0_0_40px_rgba(20,184,166,0.4)]";
       default:
-        return "aisa-avatar-idle border-border/50";
+        return "naya-avatar-idle border-white/20 shadow-xl";
     }
   };
 
   return (
     <div className="relative flex flex-col items-center">
-      {/* Glow effect */}
+      {/* Background Pulsing Glow */}
       <div
-        className={`absolute -inset-4 rounded-full blur-2xl transition-opacity duration-500 ${state === "listening" ? "opacity-60" : state === "talking" ? "opacity-80" : "opacity-30"
-          }`}
-        style={{
-          background: state === "listening"
-            ? "linear-gradient(135deg, hsl(0 72% 40% / 0.4), hsl(0 72% 50% / 0.3))"
-            : "linear-gradient(135deg, hsl(174 72% 40% / 0.4), hsl(187 72% 50% / 0.3))",
-        }}
+        className={`absolute -inset-8 rounded-full blur-3xl transition-all duration-1000 ${
+          state === "listening" ? "opacity-40 bg-accent" : 
+          state === "talking" ? "opacity-50 bg-primary" : "opacity-20 bg-primary/30"
+        }`}
       />
+      
+      {/* Animated Rings for Listening State */}
+      {state === "listening" && (
+        <>
+          <div className="absolute inset-0 rounded-full border-2 border-accent/30 animate-ping" />
+          <div className="absolute -inset-4 rounded-full border border-accent/20 animate-pulse delay-75" />
+        </>
+      )}
 
       {/* Avatar Container */}
       <div
-        className={`relative z-10 h-64 w-64 md:h-80 md:w-80 overflow-hidden rounded-full border-4 shadow-2xl transition-all duration-500 ${getStateClass()}`}
+        className={`relative z-10 h-64 w-64 md:h-80 md:w-80 overflow-hidden rounded-full border-4 transition-all duration-700 ease-in-out ${getStateClass()}`}
       >
         <img
           src="/images/aisa_avatar.png"
           alt="AISA Avatar"
-          className={`h-full w-full object-cover transition-transform duration-500 ${state === "talking" ? "scale-105" : "scale-100"
-            }`}
+          className={`h-full w-full object-cover transition-all duration-700 ${
+            state === "talking" ? "scale-110 rotate-1" : 
+            state === "listening" ? "scale-105 grayscale-[20%]" : "scale-100"
+          }`}
         />
 
-        {/* State Overlay */}
-        {state === "listening" && (
-          <div className="absolute inset-0 bg-destructive/10 animate-pulse flex items-center justify-center">
-            <div className="h-full w-full border-8 border-destructive/20 rounded-full animate-ping" />
-          </div>
-        )}
+        {/* Dynamic Light Overlay */}
+        <div className={`absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none transition-opacity duration-1000 ${state !== "idle" ? "opacity-100" : "opacity-0"}`} />
       </div>
 
-      {/* Status indicator */}
-      <div className="mt-6 flex items-center gap-2">
-        <div
-          className={`h-3 w-3 rounded-full transition-all duration-300 ${state === "listening"
-              ? "animate-pulse bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"
-              : state === "talking"
-                ? "animate-pulse bg-primary shadow-[0_0_8px_rgba(20,184,166,0.8)]"
-                : "bg-primary/50"
+      {/* Elegant Status indicator */}
+      <div className="mt-8 flex flex-col items-center gap-2">
+        <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-sm">
+          <div
+            className={`h-2 w-2 rounded-full transition-all duration-500 ${
+              state === "listening"
+                ? "bg-accent shadow-[0_0_10px_rgba(234,88,12,0.8)]"
+                : state === "talking"
+                  ? "bg-primary shadow-[0_0_10px_rgba(20,184,166,0.8)]"
+                  : "bg-white/40"
             }`}
-        />
-        <span className="text-sm font-semibold tracking-wide text-foreground animate-fade-in">
-          {state === "idle" && "AISA Siap membantu"}
-          {state === "listening" && "AISA Mendengarkan..."}
-          {state === "talking" && "AISA Berbicara..."}
-        </span>
+          />
+          <span className="text-xs font-medium tracking-widest uppercase text-foreground/80">
+            {state === "idle" && "Standby"}
+            {state === "listening" && "Listening"}
+            {state === "talking" && "Speaking"}
+          </span>
+        </div>
+        
+        <p className="text-sm text-muted-foreground italic transition-all duration-500 animate-in fade-in slide-in-from-bottom-2">
+          {state === "idle" && "Bagaimana saya bisa membantu hari ini?"}
+          {state === "listening" && "Saya mendengarkan Anda..."}
+          {state === "talking" && "Sidoarjo memiliki banyak pesona..."}
+        </p>
       </div>
     </div>
   );
