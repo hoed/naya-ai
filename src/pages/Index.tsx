@@ -209,7 +209,7 @@ const Index = () => {
         <p className="text-[10px] text-muted-foreground font-medium flex items-center justify-center gap-1.5 opacity-60">
           <span>&copy; 2025</span>
           <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-          <span>Handcrafted with precision for Sidoarjo Tourism</span>
+          <span>Crafted by Hoed with precision for Sidoarjo Tourism</span>
         </p>
       </footer>
     </div>
