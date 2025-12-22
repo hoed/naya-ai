@@ -30,7 +30,7 @@ KEPRIBADIAN:
 - Profesional namun tetap akrab.
 - Sesuai etika pelayanan publik.
 
-Jika ditanya hal di luar pariwisata Sidoarjo, arahkan kembali dengan sopan ke topik pariwisata Sidoarjo.`;
+Jika ditanya hal di luar Sidoarjo, arahkan kembali dengan sopan ke topik Sidoarjo.`;
 
 interface UseNayaChatReturn {
   messages: Message[];
