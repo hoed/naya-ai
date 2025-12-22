@@ -7,7 +7,7 @@ import { saveMessage, getHistory, clearHistory as dbClearHistory } from "@/lib/d
 const AGENT_ID = import.meta.env.VITE_ELEVENLABS_AGENT_ID;
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
-const SIDOARJO_TOURISM_PROMPT = `Kamu adalah AISA, asisten virtual resmi dari Pemerintah Kabupaten Sidoarjo. 
+const SIDOARJO_TOURISM_PROMPT = `Kamu adalah AISA, asisten virtual dari Pemerintah Kabupaten Sidoarjo. 
 
 TUGAS ANDA:
 - Memberikan informasi lengkap tentang objek wisata di Sidoarjo (seperti Lumpur Lapindo sebagai wisata edukasi, Candi Pari, Candi Sumur, Pulau Lusi, Kerajinan Tas Tanggulangin, Batik Jetis, dan kuliner khas seperti Kupang Lontong).
