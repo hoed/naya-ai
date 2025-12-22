@@ -71,26 +71,42 @@ const Index = () => {
 
   return (
     <div className="relative h-screen flex flex-col bg-background text-foreground overflow-hidden selection:bg-primary/20">
-      <audio ref={audioRef} src="/opening_sidoarjo.mp3" loop />
+      <audio ref={audioRef} src="/opening_sidoarjo.mp3" />
 
-      {/* Dynamic Background */}
+      {/* Dynamic Background with Light Bulbs */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-accent/10 blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-primary/5 blur-[100px]" />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-accent/5 blur-[120px] animate-pulse" style={{ animationDelay: '3s' }} />
 
-        {/* Particle effect */}
-        {[...Array(6)].map((_, i) => (
+        {/* Light Bulbs / Glowing Orbs */}
+        {[...Array(8)].map((_, i) => (
           <div
-            key={i}
-            className="absolute rounded-full bg-white/10 blur-sm animate-[float-particle_8s_infinite]"
+            key={`bulb-${i}`}
+            className="absolute rounded-full bg-primary animate-[bulb-glow_6s_infinite] shadow-[0_0_50px_rgba(20,184,166,0.3)]"
             style={{
-              width: `${Math.random() * 10 + 5}px`,
-              height: `${Math.random() * 10 + 5}px`,
+              width: `${Math.random() * 100 + 50}px`,
+              height: `${Math.random() * 100 + 50}px`,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              animationDelay: `${i * 1.5}s`,
-              animationDuration: `${10 + Math.random() * 5}s`
+              animationDelay: `${i * 1.2}s`,
+              opacity: 0.1
+            }}
+          />
+        ))}
+
+        {/* Elegant Particles */}
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={`particle-${i}`}
+            className="absolute rounded-full bg-white animate-[float-particle_10s_infinite]"
+            style={{
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.8}s`,
+              opacity: 0.1,
+              filter: 'blur(1px)'
             }}
           />
         ))}

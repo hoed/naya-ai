@@ -125,16 +125,15 @@
   }
 
   .naya-avatar-idle {
-    animation: naya-idle 3s ease-in-out infinite;
+    /* No movement as requested */
   }
 
   .naya-avatar-listening {
-    animation: naya-listening 1s ease-in-out infinite;
-    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+    animation: zoom-pulse 3s ease-in-out infinite;
   }
 
   .naya-avatar-talking {
-    animation: naya-talking 0.5s ease-in-out infinite;
+    animation: smooth-bounce 2s ease-in-out infinite;
   }
 
   /* Chat bubbles */
@@ -184,61 +183,45 @@
 }
 
 /* Keyframes */
-@keyframes naya-idle {
+@keyframes smooth-bounce {
   0%, 100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0);
   }
-  33% {
-    transform: translateY(-10px) rotate(1deg);
-  }
-  66% {
-    transform: translateY(-5px) rotate(-1deg);
+  50% {
+    transform: translateY(-15px);
   }
 }
 
-@keyframes naya-listening {
-  0% {
-    box-shadow: 0 0 0 0 hsl(12 84% 60% / 0.6);
-  }
-  70% {
-    box-shadow: 0 0 0 25px hsl(12 84% 60% / 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 hsl(12 84% 60% / 0);
-  }
-}
-
-@keyframes naya-talking {
+@keyframes zoom-pulse {
   0%, 100% {
     transform: scale(1);
-    filter: brightness(1);
   }
   50% {
-    transform: scale(1.03);
-    filter: brightness(1.1);
+    transform: scale(1.08);
   }
 }
 
-@keyframes slow-pan {
-  0% {
-    background-position: 0% 50%;
+@keyframes bulb-glow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+    filter: blur(20px) brightness(1);
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    opacity: 0.5;
+    transform: scale(1.2);
+    filter: blur(40px) brightness(1.5);
   }
 }
 
 @keyframes float-particle {
   0%, 100% {
     transform: translateY(0) translateX(0);
-    opacity: 0.3;
+    opacity: 0.2;
   }
   50% {
-    transform: translateY(-20px) translateX(10px);
-    opacity: 0.6;
+    transform: translateY(-40px) translateX(20px);
+    opacity: 0.4;
   }
 }
 
