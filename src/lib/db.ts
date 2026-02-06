@@ -1,8 +1,23 @@
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(import.meta.env.VITE_DATABASE_URL);
+const DATABASE_URL = import.meta.env.VITE_DATABASE_URL;
+const isValidUrl = (url: string) => {
+    try {
+        new URL(url);
+        return true;
+    } catch {
+        return false;
+    }
+};
+
+const sql = isValidUrl(DATABASE_URL) ? neon(DATABASE_URL) : null;
+
 
 const ensureTable = async () => {
+    if (!sql) {
+        console.warn('Database SQL client not initialized. Check VITE_DATABASE_URL.');
+        return;
+    }
     try {
         await sql`
       CREATE TABLE IF NOT EXISTS chat_history (
@@ -18,6 +33,7 @@ const ensureTable = async () => {
 };
 
 export const saveMessage = async (role: string, content: string) => {
+    if (!sql) return;
     try {
         await ensureTable();
         await sql`
@@ -30,6 +46,7 @@ export const saveMessage = async (role: string, content: string) => {
 };
 
 export const getHistory = async () => {
+    if (!sql) return [];
     try {
         await ensureTable();
         const result = await sql`SELECT * FROM chat_history ORDER BY created_at ASC LIMIT 50`;
@@ -42,6 +59,7 @@ export const getHistory = async () => {
 };
 
 export const clearHistory = async () => {
+    if (!sql) return;
     try {
         await sql`DELETE FROM chat_history`;
     } catch (error) {

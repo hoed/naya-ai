@@ -110,7 +110,7 @@ export const useNayaChat = (): UseNayaChatReturn => {
     try {
       await conversation.startSession({
         agentId: AGENT_ID,
-        // @ts-ignore
+        // @ts-expect-error - ElevenLabs options type mismatch
         options: {
           overrides: {
             agent: {
@@ -152,7 +152,7 @@ export const useNayaChat = (): UseNayaChatReturn => {
       }
 
       const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
+        model: "gemini-1.5-flash",
         systemInstruction: SIDOARJO_TOURISM_PROMPT,
       });
 
